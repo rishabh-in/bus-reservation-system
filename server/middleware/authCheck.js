@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import UserModel from '../models/user.model';
 
 const authCheck = async(req, res, next) => {
   try {
@@ -8,7 +9,7 @@ const authCheck = async(req, res, next) => {
 
       // check if token is valid
       const decode = jwt.decode(token);
-      req.user = await User.findOne(decode.id);
+      req.user = await UserModel.findOne(decode.id);
       next()
     }
     if(!token) {
