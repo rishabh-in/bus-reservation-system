@@ -4,6 +4,7 @@ import http from 'http';
 import dotevn from 'dotenv';
 import socketConfig from './config/socketConfig.js';
 import connectDB from './config/connectDB.js';
+import logger from './middleware/logs.js';
 
 dotevn.config()
 connectDB();
@@ -14,6 +15,7 @@ export const soc = socketConfig(server);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(logger);
 
 server.listen(process.env.PORT, () => {
   console.log("Server started running on ", process.env.PORT);
