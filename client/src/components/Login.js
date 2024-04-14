@@ -7,6 +7,13 @@ const Login = (props) => {
 
   const {setShowForm, handleAuthOperation} = props;
 
+  const handleSignin = () => {
+    handleAuthOperation('signin', {
+      email,
+      password,
+      check
+    }) 
+  }
   return (
     <div className='w-[30rem] h-[43rem] rounded-3xl bg-[#FDF5F9] shadow-2xl hover:scale-[1.01] duration-200 ease-linear'>
       <div className='flex flex-col w-full justify-center items-center'>
@@ -27,7 +34,7 @@ const Login = (props) => {
         <div className='w-[85%] mt-8'>
           <Link className='flex justify-center w-full'>
             <div className='flex rounded-xl justify-center p-3 bg-blue-600 text-white w-[80%] hover:bg-opacity-85 duration-100 ease-in-out'>
-              <img className='w-7 h-7 mr-4' src='https://www.svgrepo.com/show/327365/logo-google.svg' /> 
+              <img className='w-7 h-7 mr-4' alt='google logo' src='https://www.svgrepo.com/show/327365/logo-google.svg' /> 
               <h1 className='text-lg text-center'>Sign in with Google</h1>
             </div>
           </Link>
@@ -40,12 +47,12 @@ const Login = (props) => {
               <h2 className='font-mono my-3 text-[#7C7E7D]'>Password</h2>
               <Link onClick={() => setShowForm('resetPassword')}><h2 className='font-mono my-3 text-blue-600'>Forgot Password?</h2></Link>
             </div>
-            <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' value={password} type='text' onChange={(e) => setPassword(e.target.value)}/>
+            <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' value={password} type='password' onChange={(e) => setPassword(e.target.value)}/>
             <label className='flex mt-3 font-mono items-center'>
               <input className='mr-3 h-4 w-4' type='checkbox' checked={check} onChange={() => setCheck(!check)}/>
               Log in as travel agency
             </label>
-            <button className='w-[42%] font-mono mt-4 p-4 rounded-xl font-bold bg-black text-white'>Sign in</button>
+            <button className='w-[42%] font-mono mt-4 p-4 rounded-xl font-bold bg-black text-white' onClick={handleSignin}>Sign in</button>
           </div>
         </div>
       </div>

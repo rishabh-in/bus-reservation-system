@@ -7,6 +7,15 @@ const Signup = (props) => {
   const [check, setCheck] = useState(false);
 
   const {setShowForm, handleAuthOperation} = props;
+
+  const handleSignup = () => {
+    handleAuthOperation('signup', {
+      email,
+      password,
+      check
+    })
+  }
+
   return (
     <div className='w-[30rem] h-[43rem] rounded-3xl bg-[#FDF5F9] shadow-2xl hover:scale-[1.01] duration-200 ease-linear'>
       <div className='flex flex-col w-full justify-center items-center'>
@@ -39,12 +48,12 @@ const Signup = (props) => {
             <div className='w-full flex justify-between'>
               <h2 className='font-mono my-3 text-[#7C7E7D]'>Password</h2>
             </div>
-            <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' value={password} type='text' onChange={(e) => setPassword(e.target.value)}/>
+            <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' value={password} type='password' onChange={(e) => setPassword(e.target.value)}/>
             <label className='flex mt-3 font-mono items-center'>
             <input className='mr-3 h-4 w-4' type='checkbox' checked={check} onChange={() => setCheck(!check)}/>
               Sign up as travel agency
             </label>
-            <button className='w-[42%] font-mono mt-4 p-4 rounded-xl font-bold bg-black text-white'>Sign up</button>
+            <button className='w-[42%] font-mono mt-4 p-4 rounded-xl font-bold bg-black text-white' onClick={handleSignup}>Sign up</button>
           </div>
         </div>
       </div>

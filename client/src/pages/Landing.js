@@ -7,17 +7,22 @@ const Landing = () => {
   const [showForm, setShowForm] = useState('login');
 
   const handleAuthOperation = (operation, data) => {
-    if(operation === "login") {
-      // perform api call
-      return
-    }
-    if(operation === 'signup') {
-      // perform api call
-      return;
-    }
-    if(operation === 'forgotPassword') {
-      // perform api call
-      return;
+    switch(operation) {
+      case "signin":
+        console.log(data);
+        break;
+      
+      case 'signup':
+        console.log(data);
+        break;
+      
+      case 'resetPassword':
+        console.log(data);
+        break;
+      
+      default: 
+        console.log(data);
+        return
     }
 
   }
