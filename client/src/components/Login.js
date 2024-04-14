@@ -4,7 +4,6 @@ import { notification } from 'antd';
 const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [check, setCheck] = useState(false);
   const [api, contextHolder] = notification.useNotification();
   const {setShowForm, handleAuthOperation} = props;
 
@@ -31,7 +30,6 @@ const Login = (props) => {
     handleAuthOperation('signin', {
       email,
       password,
-      check
     }) 
   }
   return (
@@ -70,10 +68,6 @@ const Login = (props) => {
                 <Link onClick={() => setShowForm('resetPassword')}><h2 className='font-mono my-3 text-blue-600'>Forgot Password?</h2></Link>
               </div>
               <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' value={password} type='password' onChange={(e) => setPassword(e.target.value)}/>
-              <label className='flex mt-3 font-mono items-center'>
-                <input className='mr-3 h-4 w-4' type='checkbox' checked={check} onChange={() => setCheck(!check)}/>
-                Log in as travel agency
-              </label>
               <button className='w-[42%] font-mono mt-4 p-4 rounded-xl font-bold bg-black text-white' onClick={handleSignin}>Sign in</button>
             </div>
           </div>
