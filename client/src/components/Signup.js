@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Signup = (props) => {
-  const {setShowForm} = props;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [check, setCheck] = useState(false);
+
+  const {setShowForm, handleAuthOperation} = props;
   return (
     <div className='w-[30rem] h-[43rem] rounded-3xl bg-[#FDF5F9] shadow-2xl hover:scale-[1.01] duration-200 ease-linear'>
       <div className='flex flex-col w-full justify-center items-center'>
@@ -31,13 +35,13 @@ const Signup = (props) => {
         <div className='w-[85%] p-3 mt-14'>
           <div className='flex flex-col p-2 items-start'>
             <h2 className='font-mono my-3 text-[#7C7E7D]'>Email Address</h2>
-            <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' type='text' />
+            <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' value={email} type='text' onChange={(e) => setEmail(e.target.value)}/>
             <div className='w-full flex justify-between'>
               <h2 className='font-mono my-3 text-[#7C7E7D]'>Password</h2>
             </div>
-            <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' type='text' />
+            <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' value={password} type='text' onChange={(e) => setPassword(e.target.value)}/>
             <label className='flex mt-3 font-mono items-center'>
-              <input className='mr-3 h-4 w-4' type='checkbox' />
+            <input className='mr-3 h-4 w-4' type='checkbox' checked={check} onChange={() => setCheck(!check)}/>
               Sign up as travel agency
             </label>
             <button className='w-[42%] font-mono mt-4 p-4 rounded-xl font-bold bg-black text-white'>Sign up</button>

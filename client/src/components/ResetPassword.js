@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const ResetPassword = (props) => {
-  const {setShowForm} = props;
+  const [email, setEmail] = useState();
+  const {setShowForm, handleAuthOperation} = props;
+
   return (
     <div className='w-[30rem] h-[43rem] rounded-3xl bg-[#FDF5F9] shadow-2xl hover:scale-[1.01] duration-200 ease-linear'>
       <div className='flex flex-col w-full justify-center items-center'>
@@ -23,7 +25,7 @@ const ResetPassword = (props) => {
         <div className='w-[85%] p-3 mt-14'>
           <div className='flex flex-col p-2 items-start'>
             <h2 className='font-mono my-3 text-[#7C7E7D]'>Email Address</h2>
-            <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' type='text' />
+            <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' type='text' value={email} onChange={(e) => setEmail(e.target.value)}/>
             <button className='w-[50%] font-mono mt-8 p-4 rounded-xl font-bold bg-black text-white'>Reset Password</button>
           </div>
         </div>
