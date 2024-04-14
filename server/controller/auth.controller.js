@@ -5,7 +5,6 @@ export const handleUserLogin = async(req, res) => {
   try {
     const {email, password, role} = req.body;
     const userDetails = await UserModel.findOne({email});
-
     if(userDetails &&  (await userDetails.matchPassword(password))) {
       res.status(200).json({
         message: "User logged in successfully",

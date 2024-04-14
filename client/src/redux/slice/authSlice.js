@@ -6,13 +6,14 @@ const authSlice = createSlice({
     user: {},
   },
   reducers: {
-    login: (state, action) => {
+    setAuthUser: (state, action) => {
       // Set auth token to localstorage
-      // Set user
+      localStorage.setItem("authToken", action.payload.authToken);
+      state.user = action.payload;
     }
   }
 });
 
-export const {login} = authSlice.actions;
+export const {setAuthUser} = authSlice.actions;
 
 export default authSlice;
