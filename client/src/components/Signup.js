@@ -36,6 +36,10 @@ const Signup = (props) => {
               <h2 className='font-mono my-3 text-[#7C7E7D]'>Password</h2>
             </div>
             <input className='w-full outline-none p-3 rounded-xl focus:outline-blue-600' type='text' />
+            <label className='flex mt-3 font-mono items-center'>
+              <input className='mr-3 h-4 w-4' type='checkbox' />
+              Sign up as travel agency
+            </label>
             <button className='w-[42%] font-mono mt-4 p-4 rounded-xl font-bold bg-black text-white'>Sign up</button>
           </div>
         </div>
