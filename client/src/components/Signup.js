@@ -36,7 +36,7 @@ const Signup = (props) => {
     handleAuthOperation('signup', {
       email,
       password,
-      check
+      role: check ? "agency" : "endUser"
     })
   }
 

@@ -18,7 +18,7 @@ export const handleUserLogin = async(req, res) => {
         }
       });
     } else {
-      res.status(401).send({error: "Invalid email or password"});
+      res.status(401).json({error: "Invalid email or password"});
     }
   } catch (error) {
     console.log(error)
@@ -28,13 +28,25 @@ export const handleUserLogin = async(req, res) => {
 export const handleUserSignUp = async(req, res) => {
   try {
     const {email, password, role} = req.body;
-    if(!email || !password || role) {
+    if(!email || !password || !role) {
       res.status(400).json({error: "User registration failed. Please provide the required details"});
     }
-
     const user = await UserModel.create({email, password, role});
+    console.log(user);
+    if(user) {
+      res.status(200).json({message: "Signing up successfull", user: {
+        _id: user.id,
+        email: user.email,
+        authToken: generateToken(user._id)
+      }})
+    }
   } catch (error) {
     console.log(error);
+    if(error.code === 11000) {
+      res.status(400).json({error: "User already exists"});
+      return;
+    }
+    res.status(400).json({error: "Signing up failed"});
   }
 }
 

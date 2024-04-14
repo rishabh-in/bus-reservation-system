@@ -1,31 +1,33 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
 import ResetPassword from '../components/ResetPassword';
-import { useLoginMutation } from '../redux/api/authApi';
+import { useLoginMutation, useSignupMutation } from '../redux/api/authApi';
 import {notification} from 'antd';
+import useAuthentication from '../api/useAuthentication';
 
 const Landing = () => {
   const [showForm, setShowForm] = useState('login');
-  const [login, {isLoading, data, error}] = useLoginMutation();
   const [api, contextHolder] = notification.useNotification();
+  const {handleLogin, handleSignup, loginResponse, signupResponse} = useAuthentication();
 
-  const handleLogin = async(data) => {
-    try {
-      await login({email: "rishabh"});
-    } catch (error) {
-      console.log(error)
-    }
+  const showNotification = (type, message, description = "", placement = "top", duration = 3) => {
+    api[type]({
+      message,
+      description,
+      placement,
+      duration
+    })
   }
 
   const handleAuthOperation = async(operation, data) => {
     switch(operation) {
       case "signin":
-        handleLogin(data)
+        await handleLogin(data, showNotification);
         break;
       
       case 'signup':
-        console.log(data);
+        await handleSignup(data, showNotification);
         break;
       
       case 'resetPassword':
@@ -38,31 +40,26 @@ const Landing = () => {
     }
 
   }
-  if(error && error?.status) {
-    api.error({
-      message: "Login Failed",
-      description: error.data.error,
-      placement: "top",
-      duration: 3
-    })
-  }
+  console.log("login response", loginResponse.isLoading)
   return (
-    <div className='w-full h-[100vh] flex justify-center items-end bg-[#AA89F2]'>
+    <Fragment>
       {contextHolder}
-      <div className='w-[90%] h-[90%] bg-landing-bg bg-cover rounded-t-[5rem] flex'>
+      <div className='w-full h-[100vh] flex justify-center items-end bg-[#AA89F2]'>
+        <div className='w-[90%] h-[90%] bg-landing-bg bg-cover rounded-t-[5rem] flex'>
           <div className='w-1/2 flex justify-center items-center'>
             {showForm === 'login' && (
               <Login setShowForm={setShowForm} handleAuthOperation={handleAuthOperation}/>
             )} 
-             {showForm === 'signup' && (
+            {showForm === 'signup' && (
               <Signup setShowForm={setShowForm} handleAuthOperation={handleAuthOperation}/>
             )}
             {showForm === 'resetPassword' && (
               <ResetPassword setShowForm={setShowForm} handleAuthOperation={handleAuthOperation}/>
             )}
           </div>
+        </div>
       </div>
-    </div>
+    </Fragment>
   )
 }
 
