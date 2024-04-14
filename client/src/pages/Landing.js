@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
 import ResetPassword from '../components/ResetPassword';
-import { useLoginMutation, useSignupMutation } from '../redux/api/authApi';
 import {notification} from 'antd';
 import useAuthentication from '../api/useAuthentication';
 
@@ -22,12 +21,12 @@ const Landing = () => {
 
   const handleAuthOperation = async(operation, data) => {
     switch(operation) {
-      case "signin":
+      case "login":
         await handleLogin(data, showNotification);
         break;
       
       case 'signup':
-        await handleSignup(data, showNotification);
+        await handleSignup(data, showNotification, setShowForm);
         break;
       
       case 'resetPassword':

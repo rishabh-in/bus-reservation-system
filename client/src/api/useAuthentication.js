@@ -15,11 +15,12 @@ const useAuthentication = () => {
     }
   }
 
-  const handleSignup = async(data, showNotification) => {
+  const handleSignup = async(data, showNotification, setShowForm) => {
     try {
       const res = await signup(data)
       if(res?.data?.user) {
         showNotification('success', 'Sign up Successfull')
+        setShowForm("login")
       }
       if(res && res?.error) {
         showNotification('error', 'Login Failed', res.error.data.error)

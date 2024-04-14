@@ -27,7 +27,7 @@ const Login = (props) => {
       return;
     }
 
-    handleAuthOperation('signin', {
+    handleAuthOperation('login', {
       email,
       password,
     }) 
