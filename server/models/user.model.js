@@ -3,10 +3,9 @@ import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 const SALT_FACTOR = 10;
 
-const UserSchema = new mpngoose.Schema({
+const UserSchema = new mongoose.Schema({
   username: {
     type: String,
-    require: true
   },
   email: {
     type: String,
@@ -17,9 +16,17 @@ const UserSchema = new mpngoose.Schema({
     type: String,
     require: true
   },
+  phone: {
+    type: Number,
+  },
   role: {
     type: String,
-    enum: ["endUser", "agency"]
+    enum: ["endUser", "agency"],
+    required: true
+  },
+  profileCompleted: {
+    type: Boolean,
+    default: false,
   }
 }, {timestamps: true});
 
