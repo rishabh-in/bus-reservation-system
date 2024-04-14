@@ -6,7 +6,7 @@ import ResetPassword from '../components/ResetPassword';
 const Landing = () => {
   const [showForm, setShowForm] = useState('login');
 
-  const handleAuthOepration = (operation, data) => {
+  const handleAuthOperation = (operation, data) => {
     if(operation === "login") {
       // perform api call
       return
@@ -26,13 +26,13 @@ const Landing = () => {
       <div className='w-[90%] h-[90%] bg-landing-bg bg-cover rounded-t-[5rem] flex'>
           <div className='w-1/2 flex justify-center items-center'>
             {showForm === 'login' && (
-              <Login setShowForm={setShowForm} handleAuthOepration={handleAuthOepration}/>
+              <Login setShowForm={setShowForm} handleAuthOperation={handleAuthOperation}/>
             )} 
              {showForm === 'signup' && (
-              <Signup setShowForm={setShowForm} handleAuthOepration={handleAuthOepration}/>
+              <Signup setShowForm={setShowForm} handleAuthOperation={handleAuthOperation}/>
             )}
             {showForm === 'resetPassword' && (
-              <ResetPassword setShowForm={setShowForm} handleAuthOepration={handleAuthOepration}/>
+              <ResetPassword setShowForm={setShowForm} handleAuthOperation={handleAuthOperation}/>
             )}
           </div>
       </div>
