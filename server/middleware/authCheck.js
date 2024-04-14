@@ -13,11 +13,11 @@ const authCheck = async(req, res, next) => {
       next()
     }
     if(!token) {
-      res.status(403).json({message: "Not Authorized. No token"})
+      res.status(403).json({error: "Not Authorized. No token"})
     }
   } catch (error) {
     console.log(error);
-    res.status(403).json({message: "Not Authorized. Token Failed"})
+    res.status(403).json({error: "Not Authorized. Token Failed"})
   }
 }
 

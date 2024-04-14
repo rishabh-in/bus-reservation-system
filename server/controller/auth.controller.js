@@ -18,7 +18,7 @@ export const handleUserLogin = async(req, res) => {
         }
       });
     } else {
-      res.status(401).json({message: "Invalid email or password"});
+      res.status(401).send({error: "Invalid email or password"});
     }
   } catch (error) {
     console.log(error)
@@ -29,7 +29,7 @@ export const handleUserSignUp = async(req, res) => {
   try {
     const {email, password, role} = req.body;
     if(!email || !password || role) {
-      res.status(400).json({message: "User registration failed. Please provide the required details"});
+      res.status(400).json({error: "User registration failed. Please provide the required details"});
     }
 
     const user = await UserModel.create({email, password, role});
