@@ -18,13 +18,14 @@ function App() {
     if(data && data?.user) {
       dispatch(setAuthUser(data.user));
       navigate("/home")
+    } else {
+      navigate("/")
     }
   }, [data]);
 
   console.log("App rendered", data, isLoading)
 
   if (isLoading) return <div>Loading...</div>;
-
   return (
     <Fragment>
       {data?.user && data.user?.email && <Header /> }
