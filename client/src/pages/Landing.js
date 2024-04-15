@@ -6,9 +6,9 @@ import {notification} from 'antd';
 import useAuthentication from '../api/useAuthentication';
 
 const Landing = () => {
-  const [showForm, setShowForm] = useState('login');
+  const {handleLogin, handleSignup, loginResponse} = useAuthentication();
   const [api, contextHolder] = notification.useNotification();
-  const {handleLogin, handleSignup, loginResponse, signupResponse} = useAuthentication();
+  const [showForm, setShowForm] = useState('login');
 
   const showNotification = (type, message, description = "", placement = "top", duration = 3) => {
     api[type]({
@@ -39,7 +39,6 @@ const Landing = () => {
     }
 
   }
-  console.log("login response", loginResponse.isLoading)
   return (
     <Fragment>
       {contextHolder}

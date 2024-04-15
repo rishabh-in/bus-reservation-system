@@ -8,7 +8,7 @@ const authCheck = async(req, res, next) => {
       token = req.headers.authorization.split(" ")[1];
 
       // check if token is valid
-      const decode = jwt.decode(token);
+      const decode = jwt.verify(token, process.env.PRIVATE_KEY);
       req.user = await UserModel.findOne(decode.id);
       next()
     }

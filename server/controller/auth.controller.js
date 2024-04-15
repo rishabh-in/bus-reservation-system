@@ -1,5 +1,23 @@
+import jwt from 'jsonwebtoken';
 import generateToken from '../config/generateToken.js';
 import UserModel from '../models/user.model.js';
+
+export const handleAuthCheck = async(req, res) => {
+  try {
+    const {authToken} = req.params
+    const verifyToken = jwt.verify(authToken, process.env.PRIVATE_KEY);
+    const user = await UserModel.findOne({_id: verifyToken.data}).select("-password");
+    res.status(200).json({message: "valid auth token", user: {
+      email: user.email,
+      role: user.role,
+      profileCompleted: user.profileCompleted,
+      authToken,
+    }});
+  } catch (error) {
+    console.log(error);
+    res.status(403).json({error: "Token failed, Please login again"})
+  }
+}
 
 export const handleUserLogin = async(req, res) => {
   try {

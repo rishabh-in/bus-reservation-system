@@ -3,7 +3,16 @@ import { baseUrl } from '../../appConfig';
 
 const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
+  baseQuery: fetchBaseQuery({
+    baseUrl: baseUrl,
+    prepareHeaders: (headers) => {
+      let token = localStorage.getItem("authToken");
+      if(token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+      return headers;
+    }
+  }),
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
@@ -18,10 +27,16 @@ const authApi = createApi({
         method: "POST",
         body: data
       })
-    })
+    }),
+    authCheck: builder.query({
+      query: (authToken) => ({
+        url: `/auth/check/${authToken}`,
+        method: "GET"
+      })
+    }) 
   })
 });
 
-export const { useLoginMutation, useSignupMutation } = authApi;
+export const { useLoginMutation, useSignupMutation, useAuthCheckQuery } = authApi;
 
 export default authApi;

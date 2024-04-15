@@ -2,6 +2,7 @@ import { useLoginMutation, useSignupMutation } from "../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "../redux/slice/authSlice";
+
 const useAuthentication = () => {
   const [login, loginResponse] = useLoginMutation();
   const [signup, signupResponse] = useSignupMutation();
@@ -17,7 +18,7 @@ const useAuthentication = () => {
         navigate('/home')
       }
       if(res?.error) {
-        showNotification('error', 'Login Failed', res.error.data.error)
+        showNotification('error', 'Login Failed', res?.error?.data?.error ? res?.error?.data.error  : '' );
       }
     } catch (error) {
       console.log(error)
